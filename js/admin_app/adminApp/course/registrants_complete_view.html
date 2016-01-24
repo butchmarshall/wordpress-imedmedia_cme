@@ -1,0 +1,60 @@
+<div class="container cme-courses-list">
+	<div class="row">
+		<div class="col-md-10 clearfix">
+			<div class="btn-group" role="group">
+				<button class="btn btn-sm btn-default" ng-click="export_registrations()">Export All Registrations</button>
+				<button class="btn btn-sm btn-default" ng-click="add_registration()">Add Registration</button>
+			</div>
+		</div>
+	</div>
+
+	<table ng-table="tableParams" class="table table-hover">
+		<thead>
+			<tr>
+				<th class="header text-left">
+					<i class="glyphicon glyphicon-user"></i> Registrant
+				</th>
+				<th width="15%" class="header text-left">Registration ID</th>
+				<th width="15%" class="header text-left">Days Registered</th>
+				<th width="10%" class="header text-left">Additional Activities</th>
+				<th width="10%" class="header text-left">Total</th>
+				<th width="10%" class="header text-left">Paid</th>
+				<th></th>
+			</tr>
+			<tr>
+				<th class="text-center sortable">
+					<input type="text" class="form-control" placeholder="Search"
+						ng-model="search.name" ng-model-options="{debounce: 250}"  />
+				</th>
+			</tr>
+		</thead>
+		<tbody ng-repeat="registrant in $data track by $index">
+			<tr ng-repeat="registration in registrant.resources.registrations">
+				<td sortable="fields.name"><span ng-if="$index == 0">{{[registrant.last_name, registrant.first_name].join(', ')}}</span></td>
+				<td>{{registration.unique_id}}</td>
+				<td>{{registration.resources.days.length}}</td>
+				<td>{{registration.resources.activities.length}}</td>
+				<td>{{registration.total_amount|currency}}</td>
+				<td><a href="#" onclick="return false;" ng-click="registration_payments(registration.unique_id)">{{registration.total_paid|currency}}</a></td>
+				<td align="right">
+					<div class="btn-group">
+						<button type="button" class="btn btn-primary" title="Edit" ng-click="registration_edit(registration.unique_id)"><span class="glyphicon glyphicon-edit"></span></button>
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+							<span class="glyphicon" style="height: 14px"><span class="caret" style="margin-top: 4px;"></span></span>
+							<span class="sr-only">Toggle Dropdown</span>
+						</button>
+						<ul class="dropdown-menu" role="menu" style="right: 0; left: auto;">
+							<li><a href="#" onclick="return false;" ng-click="registration_email_receipt(registration.unique_id)">Email Receipt</a></li>
+							<li><a href="#" onclick="return false;" ng-click="registration_view_receipt(registration.unique_id)">View Receipt</a></li>
+							<li role="presentation" class="divider"></li>
+							<li><a href="#" onclick="return false;" ng-click="add_payment(registration.unique_id)">Add Payment</a></li>
+							<li role="presentation" class="divider"></li>
+							<li><a href="#" onclick="return false;" ng-click="set_registration_incomplete(registration.unique_id)">Delete</a></li>
+						</ul>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>

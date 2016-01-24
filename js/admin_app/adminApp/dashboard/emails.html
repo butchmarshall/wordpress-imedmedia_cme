@@ -1,0 +1,47 @@
+<div class="container cme-mailing-lists" ng-controller="EmailsController">
+	<div class="row">
+		<div class="col-md-12">
+			<button class="btn btn-primary pull-right" ng-click="add_email()">Add Email</button>
+		</div>
+	</div>
+
+	<table ng-table="tableParams" class="table table-hover">
+		<thead>
+			<tr>
+				<th class="header text-left sortable" ng-class="{
+					'sort-asc': tableParams.isSortBy('translation.name', 'asc'),
+					'sort-desc': tableParams.isSortBy('translation.name', 'desc')
+				  }"
+					filter="{ 'name': 'text' }"
+					ng-click="sortFields('translated_order', 'name')">
+					<div class="sort-indicator"><i class="glyphicon glyphicon-user"></i> Email Name</div>
+				</th>
+				<th width="15%" class="header text-left">Created At</th>
+				<th width="15%" class="header text-left">Last Mailed At</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="email in $data">
+				<td sortable="fields.name">{{email.name}}</td>
+				<td sortable="fields.created_at">{{email.created_at|date}}</td>
+				<td sortable="fields.last_sent_at">{{email.last_sent_at|date}}</td>
+				<td align="right">
+					<div class="btn-group">
+						<button type="button" class="btn btn-primary" title="Edit" ng-click="edit_email(email.id)"><span class="glyphicon glyphicon-edit"></span></button>
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+							<span class="glyphicon" style="height: 14px"><span class="caret" style="margin-top: 4px;"></span></span>
+							<span class="sr-only">Toggle Dropdown</span>
+						</button>
+						<ul class="dropdown-menu" role="menu" style="right: 0; left: auto;">
+							<li><a href="#" onclick="return false;" ng-click="find_mailing_list(email.id)">Send to Mailing List</a></li>
+							<li role="presentation" class="divider"></li>
+							<li><a href="#" onclick="return false;" ng-click="email_delete(email.id)">Delete</a></li>
+						</ul>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>

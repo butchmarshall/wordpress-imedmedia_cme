@@ -1,0 +1,46 @@
+<form name="form" novalidate ng-submit="onSubmit(model)">
+	<div class="modal-header">
+		<h3 class="modal-title">Payment Transactions</h3>
+	</div>
+	<div class="modal-body">
+		<table cellpadding="0" cellspacing="0" border="0" width="100%" class="table">
+			<thead>
+				<tr>
+					<th>Type</th>
+					<th>Amount</th>
+					<th>Refunds</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody ng-repeat="payment in payments.data">
+				<tr>
+					<td>{{payment.type}}</td>
+					<td>{{payment.amount|currency}}</td>
+					<td>
+						<table width="100%" border="0" border="1">
+							<tr ng-repeat="refund in payment.resources.refunds">
+								<td>{{refund.amount|currency}}</td>
+							</tr>
+						</table>
+					</td>
+					<td align="right">
+						<button class="btn" ng-click="add_refund(payment.id)" onclick="return false;">Add Refund</button>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<table width="100%" border="0" border="1">
+							<tr ng-repeat="(k,receipt) in payment.receipt">
+								<th width=20%">{{k}}:</th>
+								<td>{{receipt}}</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" ng-click="cancel()" onclick="return false;">Close</button>
+	</div>
+</form>

@@ -1,0 +1,4 @@
+<div>
+	<span ng-if="data.title!==undefined" class="glyphicon glyphicon-bullhorn"></span> 
+	<span ng-if="data.title===undefined" class="glyphicon glyphicon-user"></span> {{[data.title, data.first_name, data.last_name].join(' ')}} ({{data.email}})
+</div>

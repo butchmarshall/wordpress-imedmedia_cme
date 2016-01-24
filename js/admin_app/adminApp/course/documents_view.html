@@ -1,0 +1,35 @@
+
+
+<h1>General Documents</h1>
+
+<div class="row"  ng-repeat="document in documents.data">
+	<form name="form" novalidate ng-submit="onSubmit(document.id, document)">
+	<div class="input-group">
+		<span class="input-group-addon" id="basic-addon1">
+		<a href="{{document.links.document.href}}" title="Download Document" target="_new" ng-if="document.links.document && document.links.document.href">
+			<span class="glyphicon glyphicon-download"></span>
+		</a>
+		<a href="{{document.links.image.href}}" title="Download Image" target="_new" ng-if="document.links.image && document.links.image.href">
+			<span class="glyphicon glyphicon-download"></span>
+		</a>
+		</span>
+		<input type="text" ng-model="document.name" class="form-control" placeholder="Document Name" required />
+		<span class="input-group-addon" id="basic-addon1">
+			<button type="submit" ng-disabled="form.$invalid" disabled="disabled" ng-if="!model.id">
+				<span class="glyphicon glyphicon-save-file"></span>
+			</button>
+		</span>
+		<span class="input-group-addon" id="basic-addon1">
+			<a href="#" onclick="return false;" title="Delete" ng-click="document_delete(document.id)">
+				<span class="glyphicon glyphicon-remove"></span>
+			</a>
+		</span>
+	</div>
+	</form>
+</div>
+
+<div class="row">
+	<div class="form-group clearfix">
+		<input type="file" nv-file-select uploader="uploader" multiple /><br/>
+	</div>
+</div>

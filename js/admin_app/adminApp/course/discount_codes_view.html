@@ -1,0 +1,61 @@
+<div class="row">
+<div class="col-sm-10">
+	<form class="panel panel-default" ng-repeat="discount_code in discount_codes.data" id="discount_code_{{discount_code.id}}" name="form" novalidate ng-submit="onSubmit(discount_code.id, discount_code)">
+		<div class="panel-heading clearfix">
+			<h2 class="panel-title pull-left">{{discount_code.name}}</h2>
+			<button type="button" class="btn btn-default pull-right" ng-click="discount_code_delete(discount_code.id)"><span class="glyphicon glyphicon-remove"></span></button>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-12">
+					<label for="{{discount_code.id}}_name" class="control-label">Name</label>
+					<input type="text" ng-model="discount_code.name" name="name" id="{{discount_code.id}}_name" placeholder="Name" required class="form-control">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<label for="{{discount_code.id}}_discount_code" class="control-label">Discount Code</label>
+					<input type="text" ng-model="discount_code.discount_code" name="name" id="{{discount_code.id}}_discount_code" placeholder="Discount Code" required class="form-control">
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<label for="{{discount_code.id}}_discount_type" class="control-label">Discount Type</label>
+					<select ng-model="discount_code.discount_type" name="discount_type" ng-options="option.value as option.label for option in [{value: '', label: '-- Select One --'},{value: 'percent', label: 'Percent'},{value: 'amount', label: 'Amount'}]" required></select>
+				</div>
+			</div>
+
+			<div class="row" ng-if="discount_code.discount_type == 'percent'">
+				<div class="col-sm-12">
+					<label for="{{discount_code.id}}_discount_percent" class="control-label">Percent</label>
+					<input type="number" min="0" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" ng-model="discount_code.discount_percent" name="discount_code" id="{{discount_code.id}}_discount_percent" placeholder="Percent" required class="form-control">
+				</div>
+			</div>
+			
+			<div class="row" ng-if="discount_code.discount_type == 'amount'">
+				<div class="col-sm-12">
+					<label for="{{discount_code.id}}_discount_amount" class="control-label">amount</label>
+					<input type="number" min="0" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" ng-model="discount_code.discount_amount" name="discount_code" id="{{discount_code.id}}_discount_amount" placeholder="Amount" required class="form-control">
+				</div>
+			</div>
+
+			<div class="clearfix">
+				<input type="submit" class="btn btn-default pull-right" ng-click="discount_code_update(discount_code.id)" value="Save" />
+			</div>
+		</div>
+	</form>
+</div>
+<div class="col-sm-2 scrollspy">
+	<div id="schedule_nav" class="bs-docs-sidebar" affix="" data-spy="affix">
+	<ul class="nav nav-stacked">
+		<li ng-repeat="discount_code in discount_codes.data">
+			<a href="#discount_code_{{discount_code.id}}" du-smooth-scroll>{{discount_code.name}}</a>
+		</li>
+		<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="button" class="btn btn-default" ng-click="discount_code_create()">Add</button>
+		</li>
+	</ul>
+	</div>
+</div>
+</div>

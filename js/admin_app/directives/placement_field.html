@@ -1,0 +1,17 @@
+<div class="form-group" ng-if="placement.data_type != 'boolean' && (!placement.parent_field_id || (!placement.parent_field_match && placement.options && (placement.options | matchExpectedParentValue: model[placement.parent_field_id]).length > 0) || (model[placement.parent_field_id] && placement.parent_field_match && (model[placement.parent_field_id] | regexp_has_matches:placement.parent_field_match)))">
+	<label class="control-label col-xs-2" for="{{placement.id}}" style="margin-top: 20px;"><span ng-bind-html="placement.name"></span></label>
+	<div class="col-xs-10">
+		<select ng-if="placement.data_type == 'list'"   ng-model="model[placement.id]" name="{{placement.id}}" id="{{placement.id}}" ng-required="placement.required" class="form-control" ng-options="(option.value|translateValue) as (option.name || option.value|translateValue) for option in placement.options | matchExpectedParentValue: model[placement.parent_field_id]"></select>
+		<input  ng-if="placement.data_type == 'string'" ng-model="model[placement.id]" name="{{placement.id}}" id="{{placement.id}}" ng-required="placement.required" class="form-control" type="text" />
+		<textarea  ng-if="placement.data_type == 'text'" ng-model="model[placement.id]" name="{{placement.id}}" id="{{placement.id}}" ng-required="placement.required" class="form-control"></textarea>
+	</div>
+</div>
+
+<div class="form-group" ng-if="placement.data_type == 'boolean'">
+	<div class="checkbox">
+		<label class="control-label col-xs-2" for="{{placement.id}}">
+			<input type="checkbox" ng-model="model[placement.id]" name="{{placement.id}}" id="{{placement.id}}" />
+			<span ng-bind-html="placement.name"></span>
+		</label>
+	</div>
+</div>

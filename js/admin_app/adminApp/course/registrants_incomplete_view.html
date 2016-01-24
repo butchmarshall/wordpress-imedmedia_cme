@@ -1,0 +1,46 @@
+<div class="container cme-courses-list">
+	<table ng-table="tableParams" class="table table-hover">
+		<thead>
+			<tr>
+				<th class="header text-left">
+					<i class="glyphicon glyphicon-user"></i> Registrant
+				</th>
+				<th width="15%" class="header text-left">Registration ID</th>
+				<th width="15%" class="header text-left">Days Registered</th>
+				<th width="10%" class="header text-left">Additional Activities</th>
+				<th width="10%" class="header text-left">Total</th>
+				<th width="10%" class="header text-left">Paid</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="registration in $data">
+				<td sortable="fields.name">
+					<table border="1">
+					<tr ng-repeat="field in registration.resources.fields">
+						<td ng-bind-html="field_names[field.field_id]"></td>
+						<td ng-bind-html="field.value"></td>
+					</tr>
+					</table>
+				</td>
+				<td>{{registration.unique_id}}</td>
+				<td>{{registration.resources.days.length}}</td>
+				<td>{{registration.resources.activities.length}}</td>
+				<td>{{registration.total_amount|currency}}</td>
+				<td><a href="#" onclick="return false;" ng-click="registration_payments(registration.unique_id)">{{registration.total_paid|currency}}</a></td>
+				<td align="right">
+					<div class="btn-group">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+							<span class="glyphicon" style="height: 14px"><span class="caret" style="margin-top: 4px;"></span></span>
+							<span class="sr-only">Toggle Dropdown</span>
+						</button>
+						<ul class="dropdown-menu" role="menu" style="right: 0; left: auto;">
+							<li><a href="#" onclick="return false;" ng-click="set_registration_complete(registration.unique_id)">Set Complete</a></li>
+						</ul>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>

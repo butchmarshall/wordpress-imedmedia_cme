@@ -1,0 +1,68 @@
+<form name="form" novalidate ng-submit="onSubmit(model)">
+	<div class="modal-header">
+		<h3 class="modal-title" ng-if="model.id">Edit Activity</h3>
+		<h3 class="modal-title" ng-if="!model.id">New Activity</h3>
+	</div>
+	<div class="modal-body">
+		<input type="hidden" ng-model="model.id" ng-if="model.id > 0" />
+		<div class="row">
+			<div class="col-sm-6">
+				<label for="starts_at" class="control-label">Starts At</label>
+				<input type="time" ng-model="model.activity.starts_at" name="starts_at" id="starts_at" placeholder="Starts At" required class="form-control">
+			</div>
+			<div class="col-sm-6">
+				<label for="ends_at" class="control-label">Ends At</label>
+				<input type="time" ng-model="model.activity.ends_at" name="ends_at" id="ends_at" placeholder="Ends At" required class="form-control">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<label for="name" class="control-label">Title</label>
+				<input type="text" ng-model="model.activity.name.en" name="name" id="name" placeholder="Title" required class="form-control">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<label for="name" class="control-label">Location</label>
+				<input type="text" ng-model="model.activity.location.en" name="location" id="location" placeholder="Location" class="form-control">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<label for="name" class="control-label">Checkout Description (Additional Activites Only)</label>
+				<textarea ui-tinymce="tinymceOptions" ng-model="mce_description_html"></textarea>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<label for="name" class="control-label">Schedule Description</label>
+				<textarea ui-tinymce="tinymceOptions" ng-model="mce_schedule_description_html"></textarea>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<input type="checkbox" ng-model="model.activity.is_additional" name="allow_partial" id="{{model.activity.id}}_is_additional" />
+				<label for="{{model.activity.id}}_is_additional" class="control-label" >Is Extra Activity?</label>
+			</div>
+		</div>
+		<div ng-if="model.activity.is_additional">
+			<div class="row">
+				<div class="col-sm-12">
+					<label for="name" class="control-label">Available Seats</label>
+					<input type="integer" ng-model="model.activity.available_seats" ng-min="0" name="available_seats" id="available_seats" class="form-control" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<label for="name" class="control-label">Price ($)</label>
+					<input type="integer" ng-model="model.activity.amount" ng-min="0" name="available_seats" id="available_seats" class="form-control" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" ng-click="cancel()" onclick="return false;">Cancel</button>
+		<input type="submit" value="Update" class="btn btn-primary" ng-disabled="form.$invalid" disabled="disabled" ng-if="model.id">
+		<input type="submit" value="Create" class="btn btn-primary" ng-disabled="form.$invalid" disabled="disabled" ng-if="!model.id">
+	</div>
+</form>

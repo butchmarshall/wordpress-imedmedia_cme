@@ -1,0 +1,44 @@
+<div class="container cme-mailing-lists" ng-controller="MailingListsController">
+	<div class="row">
+		<div class="col-md-12">
+			<button class="btn btn-primary pull-right" ng-click="add_mailing_list()">Add List</button>
+		</div>
+	</div>
+
+	<table ng-table="tableParams" class="table table-hover">
+		<thead>
+			<tr>
+				<th class="header text-left sortable" ng-class="{
+					'sort-asc': tableParams.isSortBy('translation.name', 'asc'),
+					'sort-desc': tableParams.isSortBy('translation.name', 'desc')
+				  }"
+					filter="{ 'name': 'text' }"
+					ng-click="sortFields('translated_order', 'name')">
+					<div class="sort-indicator"><i class="glyphicon glyphicon-user"></i> List Name</div>
+				</th>
+				<th width="15%" class="header text-left">Created At</th>
+				<th width="15%" class="header text-left">Last Mailed At</th>
+				<th width="10%" class="header text-left">Total Subscribers</th>
+				<th></th>
+			</tr><!--
+			<tr>
+				<th class="text-center sortable">
+					<input type="text" class="form-control" placeholder="Search (not yet functional)"
+						ng-model="search.name" ng-model-options="{debounce: 250}"  />
+				</th>
+			</tr>-->
+		</thead>
+		<tbody>
+			<tr ng-repeat="mailing_list in $data">
+				<td ui-sref="dashboard.mailing_list.subscribers({mailingListId: mailing_list.id})" sortable="fields.name">{{mailing_list.name}}</td>
+				<td ui-sref="dashboard.mailing_list.subscribers({mailingListId: mailing_list.id})" sortable="fields.created_at">{{mailing_list.created_at|date}}</td>
+				<td ui-sref="dashboard.mailing_list.subscribers({mailingListId: mailing_list.id})" sortable="fields.last_sent_at">{{mailing_list.last_sent_at|date}}</td>
+				<td ui-sref="dashboard.mailing_list.subscribers({mailingListId: mailing_list.id})" sortable="fields.total_subscribers">{{mailing_list.total_subscribers}}</td>
+				<td>
+					<button type="button" class="btn btn-default pull-right" ng-click="mailing_list_delete(mailing_list.id)"><span class="glyphicon glyphicon-remove"></span></button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>

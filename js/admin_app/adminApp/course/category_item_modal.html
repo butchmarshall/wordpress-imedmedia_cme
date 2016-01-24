@@ -1,0 +1,22 @@
+<form name="form" novalidate ng-submit="onSubmit(model)">
+	<div class="modal-header">
+		<h3 class="modal-title" ng-if="model.id">Edit Item</h3>
+		<h3 class="modal-title" ng-if="!model.id">New Item</h3>
+	</div>
+	<div class="modal-body">
+		<input type="hidden" ng-model="model.id" ng-if="model.id > 0" />
+		<div class="form-group">
+			<label for="name" class="control-label">Item Name</label>
+			<input type="text" ng-model="model.item.name.en" name="name" id="name" placeholder="Item Name" required class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="description">Description</label>
+			<textarea ui-tinymce="tinymceOptions" ng-model="mce_html"></textarea>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" ng-click="cancel()" onclick="return false;">Cancel</button>
+		<input type="submit" value="Update" class="btn btn-primary" ng-disabled="form.$invalid" disabled="disabled" ng-if="model.id">
+		<input type="submit" value="Create" class="btn btn-primary" ng-disabled="form.$invalid" disabled="disabled" ng-if="!model.id">
+	</div>
+</form>

@@ -1,0 +1,39 @@
+<form name="form" novalidate ng-submit="onSubmit(model)">
+	<div class="modal-header">
+		<h3 class="modal-title" ng-if="model.id">Edit Speaker</h3>
+		<h3 class="modal-title" ng-if="!model.id">New Speaker</h3>
+	</div>
+	<div class="modal-body">
+		<input type="hidden" ng-model="model.id" ng-if="model.id > 0" />
+		<div class="form-group">
+			<label for="title" class="control-label">Title</label>
+			<input type="text" ng-model="model.speaker.title" name="title" id="title" placeholder="Title" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="first_name" class="control-label">First Name</label>
+			<input type="text" ng-model="model.speaker.first_name" name="first_name" id="first_name" placeholder="First Name" required class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="last_name" class="control-label">Last Name</label>
+			<input type="text" ng-model="model.speaker.last_name" name="last_name" id="last_name" placeholder="Last Name" required class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="email" class="control-label">Email</label>
+			<input type="email" ng-model="model.speaker.email" name="email" id="email" placeholder="Email" required class="form-control">
+		</div>
+		
+		<div class="form-group">
+			<label for="password" class="control-label">Password</label>
+			<input pw-check="password_confirmation" type="password" ng-model="model.speaker.password" name="password" id="password" placeholder="Password" class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="password_confirmation" class="control-label">Password Confirmation</label>
+			<input pw-check="password" type="password" ng-model="model.speaker.password_confirmation" name="password_confirmation" id="password_confirmation" placeholder="Password Confirmation" class="form-control">
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" ng-click="cancel()" onclick="return false;">Cancel</button>
+		<input type="submit" value="Update" class="btn btn-primary" ng-disabled="form.$invalid" disabled="disabled" ng-if="model.id">
+			<input type="submit" value="Create" class="btn btn-primary" ng-disabled="form.$invalid" disabled="disabled" ng-if="!model.id">
+	</div>
+</form>

@@ -1,0 +1,186 @@
+<form name="form" novalidate ng-submit="onSubmit(course)">
+
+<div class="row">
+<div class="col-sm-10">
+	
+<div class="row" id="name">
+	<div class="col-sm-12">
+		<label for="name" class="control-label">Course Title</label>
+		<input type="text" ng-model="course.name.en" name="name" id="name" placeholder="Title" required class="form-control">
+	</div>
+</div>
+
+<div class="row" id="state">
+	<div class="col-sm-12">
+		<label for="state" class="control-label">Please specify what phase of the course life cycle you would like to be in.</label>
+		<div ng-if="course.state == 'development'">
+			<p>No details published.</p>
+			<p>Does not appear in the list of upcoming courses.</p>
+		</div>
+		<div ng-if="course.state == 'scheduled'">
+			<p>Details are published.</p>
+			<p>Appears in list of upcoming courses.</p>
+			<p>Registration is not yet open.</p>
+		</div>
+		<div ng-if="course.state == 'open'">
+			<p>Accepting Registrations.</p>
+			<p>Accepting Downloads from speakers.</p>
+		</div>
+		<div ng-if="course.state == 'completed'">
+			<p>Registration is closed.</p>
+			<p>Presentations are available for download by attendees.</p>
+		</div>
+		<div ng-if="course.state == 'archived'">
+			<p>Registration is closed.</p>
+			<p>Presentations are archived for download.</p>
+		</div>
+		<div ng-if="course.state == 'decativated'">
+			<p>Registration is closed.</p>
+			<p>Presentations are no longer available.</p>
+		</div>
+		<select name="state" ng-model="course.state"  class="form-control" ng-options="(option.id) as (option.name) for option in [{id:'development', name:'Development'}, {id:'scheduled', name:'Scheduled'}, {id:'open', name:'Open'}, {id:'completed', name:'Completed'}, {id:'archived', name:'Archived'}, {id:'deactivated', name:'Deactivated'}]"></select>
+	</div>
+</div>
+
+<div class="row" id="location" >
+	<div class="col-sm-12">
+		<label for="location" class="control-label">Course Location</label>
+		<input type="text" ng-model="course.location.en" name="location" placeholder="Location" required class="form-control">
+	</div>
+</div>
+
+
+<div class="row" id="available_seats">
+	<div class="col-sm-12">
+		<label for="available_seats" class="control-label">Available Seats</label>
+		<input type="text" ng-model="course.available_seats" name="available_seats" placeholder="Available Seats" required class="form-control">
+	</div>
+</div>
+
+<div class="row" id="position">
+	<div class="col-sm-12">
+		<label for="position" class="control-label">Override Position</label>
+		<input type="text" ng-model="course.position" name="position" id="position" placeholder="Override Position" class="form-control">
+	</div>
+</div>
+
+<div class="row" id="show_in_banner">
+	<div class="col-sm-12">
+		<input type="checkbox" ng-model="course.show_in_banner" name="show_in_banner" />
+		<label for="show_in_banner" class="control-label" >Show in Banner?</label>
+	</div>
+</div>
+
+<div class="row" id="allow_schedule_overlaps">
+	<div class="col-sm-12">
+		<input type="checkbox" ng-model="course.allow_schedule_overlaps" name="allow_schedule_overlaps" />
+		<label for="allow_schedule_overlaps" class="control-label" >Allow overlapping schedule items?</label>
+	</div>
+</div>
+
+<div class="row" id="course_image">
+	<div class="col-sm-12">
+		<label for="header_image" class="control-label" >Course Image</label>
+		<input type="file" nv-file-select uploader="uploaderCourseImage" /><br/>
+		<img src="{{course.header_image.links.image.href}}" border="0" height="400" />
+	</div>
+</div>
+
+<div class="row" id="banner_image">
+	<div class="col-sm-12">
+		<label for="banner_image" class="control-label">Banner Image</label>
+		<input type="file" nv-file-select uploader="uploaderBannerImage" /><br/>
+		<img src="{{course.banner_image.links.image.href}}" border="0" height="400" />
+	</div>
+</div>
+
+<div class="row" id="description">
+	<div class="col-sm-12">
+		<label for="name" class="control-label">Course Description</label>
+		<textarea ui-tinymce="tinymceOptions" ng-model="course.description.en"></textarea>
+	</div>
+</div>
+
+<div class="row" id="left_description">
+	<div class="col-sm-12">
+		<label for="left_description" class="control-label">Left Description</label>
+		<textarea ui-tinymce="tinymceOptions" ng-model="course.left_description.en"></textarea>
+	</div>
+</div>
+
+<div class="row" id="refund_policy">
+	<div class="col-sm-12">
+		<label for="refund_policy" class="control-label">Refund Policy</label>
+		<textarea ui-tinymce="tinymceOptions" ng-model="course.refund_policy"></textarea>
+	</div>
+</div>
+
+<div class="row" id="terms_and_conditions">
+	<div class="col-sm-12">
+		<label for="terms_and_conditions" class="control-label">Terms and Conditions</label>
+		<textarea ui-tinymce="tinymceOptions" ng-model="course.terms_and_conditions"></textarea>
+	</div>
+</div>
+
+<div class="row" id="banner_description">
+	<div class="col-sm-12">
+		<label for="banner_description" class="control-label">Banner Description</label>
+		<textarea  ng-model="course.banner_description.en" class="form-control"></textarea>
+	</div>
+</div>
+
+</div>
+<div class="col-sm-2 scrollspy">
+	<div id="schedule_nav" class="bs-docs-sidebar" affix="" data-spy="affix">
+	<ul class="nav nav-stacked">
+		<li>
+			<a href="#name" du-smooth-scroll>Course Title</a>
+		</li>
+		<li>
+			<a href="#state" du-smooth-scroll>Course Phase</a>
+		</li>
+		<li>
+			<a href="#location" du-smooth-scroll>Course Location</a>
+		</li>
+		<li>
+			<a href="#available_seats" du-smooth-scroll>Available Seats</a>
+		</li>
+		<li>
+			<a href="#position" du-smooth-scroll>Override Position</a>
+		</li>
+		<li>
+			<a href="#show_in_banner" du-smooth-scroll>Show in Banner?</a>
+		</li>
+		<li>
+			<a href="#allow_schedule_overlaps" du-smooth-scroll>Allow schedule overlaps?</a>
+		</li>
+		<li>
+			<a href="#course_image" du-smooth-scroll>Course Image</a>
+		</li>
+		<li>
+			<a href="#banner_image" du-smooth-scroll>Banner Image</a>
+		</li>
+		<li>
+			<a href="#description" du-smooth-scroll>Course Description</a>
+		</li>
+		<li>
+			<a href="#left_description" du-smooth-scroll>Left Description</a>
+		</li>
+		<li>
+			<a href="#refund_policy" du-smooth-scroll>Refund Policy</a>
+		</li>
+		<li>
+			<a href="#terms_and_conditions" du-smooth-scroll>Terms and Conditions</a>
+		</li>
+		<li>
+			<a href="#banner_description" du-smooth-scroll>Banner Description</a>
+		</li>
+		<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input type="submit" value="Save" class="btn btn-primary" ng-disabled="form.$invalid">
+		</li>
+	</ul>
+	</div>
+</div>
+</div>
+
+</form>

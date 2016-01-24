@@ -1,0 +1,59 @@
+<div class="container-fluid">
+	<div class="row">
+		<h2>{{course.name|translateValue}} <button ui-sref="dashboard.courses" class="btn pull-right" onclick="return false;">Back to Dashboard</button></h2>
+	</div>
+	<div class="row">
+		<div class="main" ui-view>
+
+		</div>
+		<div class="sidebar">
+		<ul class="nav nav-sidebar">
+			<li>
+				<span class="imed-menu-header">
+					<span class="imed-text">Course Categories</span>
+				</span>
+				<a href="#" onclick="return false;" ng-click="show_category(category.id)" class="imed-course-category-subitem" ng-repeat="category in categories.data">
+					<span class="imed-text">{{category.name.en}}</span>
+				</a>
+				<a href="#" onclick="return false;" ng-click="add_category()" class="imed-course-category-subitem">
+					<span class="imed-text">Add Category</span>
+				</a>
+			</li>
+			<li>
+				<span class="imed-menu-header"><span class="imed-text">Emails</span></span>
+				<a href="#" onclick="return false;" ui-sref="course.email_speakers" class="imed-course-category-subitem"><span class="imed-text">Speakers</span></a>
+				<a href="#" onclick="return false;" ui-sref="course.email_registrants" class="imed-course-category-subitem"><span class="imed-text">Registrants</span></a>
+			</li>
+			<li>
+				<span class="imed-menu-header"><a href="#" onclick="return false;" ui-sref="course.schedule"><span class="imed-text">Schedule</span></a></span>
+			</li>
+			<li>
+				<span class="imed-menu-header"><span class="imed-text">Documents</span></span>
+				<a href="#" onclick="return false;" class="imed-course-category-subitem" ui-sref="course.documents"><span class="imed-text">General Documents</span></a>
+				<a href="#" onclick="return false;" class="imed-course-category-subitem" ui-sref="course.presentations"><span class="imed-text">Presentations</span></a>
+			</li>
+			<li>
+				<span class="imed-menu-header"><span class="imed-text">Registration</span></span>
+				<a href="#" onclick="return false;" class="imed-course-category-subitem" ui-sref="course.fees"><span class="imed-text">Daily Fee Structure</span></a>
+				<a href="#" onclick="return false;" class="imed-course-category-subitem" ui-sref="course.discount_codes"><span class="imed-text">Discount Codes</span></a>
+				<a href="#" onclick="return false;" class="imed-course-category-subitem" ui-sref="course.registrants.complete"><span class="imed-text">Course Registrants</span></a>
+				<a href="#" onclick="return false;" class="imed-course-category-subitem" ui-sref="course.additional_activities"><span class="imed-text">Additional Activities</span></a>
+				<!--<a href="#" onclick="return false;" class="imed-course-category-subitem" ui-sref="course.sponsors"><span class="imed-text">Sponsors</span></a>-->
+			</li>
+			<li>
+				<span class="imed-menu-header">
+					<a href="#" onclick="return false;" ui-sref="course.settings"><span class="imed-text">Course Settings</span></a>
+				</span>
+				<a href="#" onclick="return false;" ui-sref="course.taxes"><span class="imed-text">Taxes</span></a>
+			</li>
+			<li>
+				<span class="imed-menu-header">
+					<span class="imed-text">Frontend</span>
+				</span>
+				<a href="#" onclick="return false;" ng-click="course_redirect()"><span class="imed-text">Course Page</span></a>
+				<a href="#" onclick="return false;" ng-click="registration_redirect()"><span class="imed-text">Registration Page</span></a>
+			</li>
+		</ul>
+		</div>
+	</div>
+</div>

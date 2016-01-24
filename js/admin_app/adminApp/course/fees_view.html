@@ -1,0 +1,79 @@
+<div class="row">
+<div class="col-sm-10">
+	<form class="panel panel-default" ng-repeat="fee in fees.data" id="fee_{{fee.id}}" name="form" novalidate ng-submit="onSubmit(fee.id, fee)">
+		<div class="panel-heading clearfix">
+			<h2 class="panel-title pull-left">{{fee.name.en}}</h2>
+			<button type="button" class="btn btn-default pull-right" ng-click="fee_delete(fee.id)"><span class="glyphicon glyphicon-remove"></span></button>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-12">
+					<label for="{{fee.id}}_name" class="control-label">Name</label>
+					<input type="text" ng-model="fee.name.en" name="name" id="{{fee.id}}_name" placeholder="Name" required class="form-control">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<label for="{{fee.id}}_fee" class="control-label">Full Registration Fee</label>
+					<input type="number" min="0" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" ng-model="fee.full_amount" name="fee" id="{{fee.id}}_fee" placeholder="Fee" required class="form-control">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<input type="checkbox" ng-model="fee.allow_partial" name="allow_partial" id="{{fee.id}}_allow_partial" />
+					<label for="{{fee.id}}_allow_partial" class="control-label">Allow Partial Registration?</label>
+				</div>
+			</div>
+			<div ng-if="fee.allow_partial">
+			<div class="row">
+				<div class="col-sm-12">
+					<label for="{{fee.id}}_partial_fee_type" class="control-label">Daily Fee Structure</label>
+					<select ng-model="fee.partial_fee_type" name="partial_fee_type" ng-options="option.value as option.label for option in [{value: '', label: '-- Select One --'},{value: 'same', label: 'Same'},{value: 'different', label: 'Different'}, {value: 'multi', label: 'Multi'}]"></select>
+				</div>
+			</div>
+			
+			<div class="row" ng-if="fee.partial_fee_type == 'same'">
+				<div class="col-sm-12">
+					<label for="{{fee.id}}_same_fee_amount" class="control-label">Same Fee</label>
+					<input type="number" min="0" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" ng-model="fee.same_fee_amount" name="same_fee_amount" id="{{fee.id}}_same_fee_amount" placeholder="Same Fee Amount" required class="form-control">
+				</div>
+			</div>
+			
+			<div class="row" ng-if="fee.partial_fee_type == 'multi'">
+				<div class="col-sm-12">
+					<label for="{{fee.id}}_multi_day_first_day_amount" class="control-label">1 Day Fee</label>
+					<input type="number" min="0" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" ng-model="fee.multi_day_first_day_amount" name="multi_day_first_day_amount" id="{{fee.id}}_multi_day_first_day_amount" placeholder="First Day Amount" required class="form-control">
+				</div>
+			</div>
+			<div class="row" ng-if="fee.partial_fee_type == 'multi'">
+				<div class="col-sm-12">
+					<label for="{{fee.id}}_multi_day_additional_day_amount" class="control-label">Amount for each additional day</label>
+					<input type="number" min="0" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" ng-model="fee.multi_day_additional_day_amount" name="multi_day_additional_day_amount" id="{{fee.id}}_multi_day_additional_day_amount" placeholder="Additional Day Amount" required class="form-control">
+				</div>
+			</div>
+			<div class="row" ng-if="fee.partial_fee_type == 'different'" ng-repeat="fee_day in fee.resources.days">
+				<div class="col-sm-12">
+					<label for="{{fee_day.date|date}}_day_fee_amount" class="control-label">{{fee_day.date|date}}</label>
+					<input type="number" min="0" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" ng-model="fee_day.amount" ng-value="day.amount" name="{{fee_day.date|date}}_day_fee_amount" id="{{fee_day.date|date}}_day_fee_amount" placeholder="{{fee_day.date|date}} amount" required class="form-control">
+				</div>
+			</div>
+			</div>
+			<div class="clearfix">
+				<input type="submit" class="btn btn-default pull-right" ng-click="fee_update(fee.id)" value="Save" />
+			</div>
+		</div>
+	</form>
+</div>
+<div class="col-sm-2 scrollspy">
+	<div id="schedule_nav" class="bs-docs-sidebar" affix="" data-spy="affix">
+	<ul class="nav nav-stacked">
+		<li ng-repeat="fee in fees.data">
+			<a href="#fee_{{fee.id}}" du-smooth-scroll>{{fee.name.en}}</a>
+		</li>
+		<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="button" class="btn btn-default" ng-click="fee_create()">Add Fee</button>
+		</li>
+	</ul>
+	</div>
+</div>
+</div>

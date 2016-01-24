@@ -1,0 +1,127 @@
+.loader {
+	text-align: left;
+}
+
+.ng-table th.text-left {
+    text-align: left;
+}
+
+.row {
+  margin-bottom: 20px;
+}
+.row .row {
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+[class*="col-"] {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.cme-recipients-list tr td:hover,
+.cme-courses-list tr td:hover,
+.cme-mailing-lists tr td:hover {
+	cursor: pointer;
+}
+
+.sidebar {
+    display: block;
+    margin-right: 85em;
+    width: 17em;
+}
+.sidebar .nav-sidebar li {
+	margin-bottom: 1em;
+}
+
+.main {
+    display: block;
+    float: right;
+    width: 90em;
+}
+
+
+
+#schedule_nav {
+	width: 350px;
+}
+/* sidebar */
+.bs-docs-sidebar {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+/* all links */
+.bs-docs-sidebar .nav>li>a {
+	color: #999;
+	border-left: 2px solid transparent;
+	padding: 4px 20px;
+	font-size: 13px;
+	font-weight: 400;
+	white-space: nowrap;
+}
+
+/* nested links */
+.bs-docs-sidebar .nav .nav>li>a {
+	padding-top: 1px;
+	padding-bottom: 1px;
+	padding-left: 30px;
+	font-size: 12px;
+}
+
+/* active & hover links */
+.bs-docs-sidebar .nav>.active>a, 
+.bs-docs-sidebar .nav>li>a:hover, 
+.bs-docs-sidebar .nav>li>a:focus {
+	color: #563d7c;                 
+	text-decoration: none;          
+	background-color: transparent;  
+	border-left-color: #563d7c; 
+}
+/* all active links */
+.bs-docs-sidebar .nav>.active>a, 
+.bs-docs-sidebar .nav>.active:hover>a,
+.bs-docs-sidebar .nav>.active:focus>a {
+	font-weight: 700;
+}
+/* nested active links */
+.bs-docs-sidebar .nav .nav>.active>a, 
+.bs-docs-sidebar .nav .nav>.active:hover>a,
+.bs-docs-sidebar .nav .nav>.active:focus>a {
+	font-weight: 500;
+}
+
+/* hide inactive nested list */
+.bs-docs-sidebar .nav ul.nav {
+	display: none;           
+}
+/* show active nested list */
+.bs-docs-sidebar .nav>.active>ul.nav {
+	display: block;           
+}
+.affix {
+	top: 20px;
+}
+
+.row-no-padding [class*="col-"] {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.ps-ng-activity input[type="checkbox"],
+.ps-ng-day input[type="checkbox"] {
+	margin-top: 15px;
+	outline: none;
+}
+
+.ps-ng-day {
+	margin-bottom: 0;
+	margin-top: 10px;
+	background-color: #B7B7B7;
+	border-top: 1px solid #000000;
+	border-bottom: 1px solid #000000;
+}
+.ps-ng-activity {
+	margin-bottom: 0;
+	background-color: #D7D7D7;
+	border-bottom: 1px solid #000000;
+}

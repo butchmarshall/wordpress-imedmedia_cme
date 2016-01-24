@@ -1,0 +1,14 @@
+<form name="form" novalidate ng-submit="onSubmit(model)">
+	<div class="modal-header">
+		<h3 class="modal-title" ng-if="model.id">Edit Category</h3>
+		<h3 class="modal-title" ng-if="!model.id">New Category</h3>
+	</div>
+	<div class="modal-body">
+		<category-form model="model"></category-form>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" ng-click="cancel()" onclick="return false;">Cancel</button>
+		<input type="submit" value="Update" class="btn btn-primary" ng-disabled="form.$invalid" disabled="disabled" ng-if="model.id">
+			<input type="submit" value="Create" class="btn btn-primary" ng-disabled="form.$invalid" disabled="disabled" ng-if="!model.id">
+	</div>
+</form>

@@ -1,0 +1,82 @@
+<div class="modal-header">
+	<h3 class="modal-title">All Registrants</h3>
+</div>
+
+<div class="modal-body">
+	
+<table ng-table="tableParams" class="table table-hover">
+	<thead>
+		<tr>
+			<th class="header text-left">
+				<i class="glyphicon glyphicon-envelope"></i> Email
+			</th>
+			<th class="header text-left">
+				<i class="glyphicon glyphicon-user"></i> Name
+			</th>
+			<th class="header text-left">
+				Country
+			</th>
+			<th class="header text-left">
+				Specialization
+			</th>
+			<th class="header text-left">
+				Organization
+			</th>
+			<th class="header text-left">
+				Courses
+			</th>
+		</tr>
+		<tr>
+			<th class="text-center">
+				<input type="text" class="form-control" placeholder="Search Email"
+					ng-model="search.email" ng-model-options="{debounce: 250}"  />
+			</th>
+			<th class="text-center">
+				<input type="text" class="form-control" placeholder="Search Name"
+					ng-model="search.name" ng-model-options="{debounce: 250}"  />
+			</th>
+			<th class="text-center">
+				<input type="text" class="form-control" placeholder="Search Country"
+					ng-model="search.fields.country" ng-model-options="{debounce: 250}"  />
+			</th>
+			<th class="text-center">
+				<input type="text" class="form-control" placeholder="Search Specialization"
+					ng-model="search.fields.specialization" ng-model-options="{debounce: 250}"  />
+			</th>
+			<th class="text-center">
+				<input type="text" class="form-control" placeholder="Search Organization"
+					ng-model="search.fields.organization" ng-model-options="{debounce: 250}"  />
+			</th>
+			<th width="180px" class="text-center">
+				<input type="text" class="form-control" placeholder="Search Courses"
+					ng-model="search.fields.courses" ng-model-options="{debounce: 250}"  />
+			</th>
+			<th width="80px"></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="user in $data track by $index" >
+			<td>{{user.email}}</td>
+			<td>{{user.first_name}} {{user.last_name}}</td>
+			<td>{{user.fields.country}}</td>
+			<td>{{user.fields.specialization}}</td>
+			<td>{{user.fields.organization}}</td>
+			<td ng-bind-html="user.fields.courses.join('<br/>')"></td>
+			<td>
+				<div class="btn-group" role="group">
+				<button type="button" class="btn btn-xs btn-success" ng-click="add_recipient(user)">Add</button>
+				<button type="button" class="btn btn-xs btn-default" ng-click="edit_recipient(user)">Edit</button>
+				</div>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+</div>
+
+<div class="modal-footer">
+	
+	<h5 class="pull-left">{{total}} recipients found.</h5>
+	<button class="btn" ng-click="cancel()">Cancel</button>
+	<button class="btn btn-primary" ng-click="add_search_results()">Add Results</button>
+</div>

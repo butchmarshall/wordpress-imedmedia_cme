@@ -1,0 +1,17 @@
+<form class="form-horizontal" name="form" novalidate ng-submit="onSubmit(model)">
+	<div class="modal-header">
+		<h3 class="modal-title">Add Refund</h3>
+	</div>
+	<div class="modal-body">
+		<div class="form-group">
+			<label class="control-label col-xs-2" for="amount" style="margin-top: 20px;">Amount</label>
+			<div class="col-xs-10">
+				<input ng-model="model.amount" name="amount" id="amount" ng-required="true" required class="form-control" type="number" ng-min="0.01" />
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" ng-click="cancel()" onclick="return false;">Cancel</button>
+		<input type="submit" value="Add Refund" class="btn btn-primary" ng-disabled="form.$invalid" disabled="disabled">
+	</div>
+</form>

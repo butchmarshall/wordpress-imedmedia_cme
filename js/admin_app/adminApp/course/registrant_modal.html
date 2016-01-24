@@ -1,0 +1,47 @@
+<form class="form-horizontal" name="form" novalidate ng-submit="onSubmit(model)">
+	<div class="modal-header">
+		<h3 class="modal-title" ng-if="model.unique_id">Edit Registration</h3>
+		<h3 class="modal-title" ng-if="!model.unique_id">New Registration</h3>
+	</div>
+	<div class="modal-body">
+		<h4>Registration Information</h4>
+		<hr/>
+		<div ng-repeat="placement in placements.data.registration_payment_level" placement-field placement="placement" model="model.fields"></div>
+		<div ng-repeat="placement in placements.data.registration_other_info"    placement-field placement="placement" model="model.fields"></div>
+		<hr/>
+		<h4>Billing Address</h4>
+		<hr/>
+		<div ng-repeat="placement in placements.data.registration_billing_address" placement-field placement="placement" model="model.fields"></div>
+		<hr/>
+		<div ng-if="model.fields['297']">
+		<h4>Mailing Address</h4>
+		<hr/>
+		<div ng-repeat="placement in placements.data.registration_mailing_address" placement-field placement="placement" model="model.fields"></div>
+		<hr/>
+		</div>
+		<h4>Registered Days</h4>
+		<div ng-repeat="day in model.days">
+			<div class="row ps-ng-day">
+				<input class="col-xs-2" ng-model="day.selected" type="checkbox" name="days[]" id="day_{{day.id}}" ng-checked="day.selected || !model.fees[model.fields.fee_level].allow_partial" ng-disabled="!model.fees[model.fields.fee_level].allow_partial" />
+				<div class="col-xs-2">{{day.starts_at|date}}
+				
+				<div ng-if="model.fees[model.fields.fee_level].partial_fee_type == 'same' && model.fees[model.fields.fee_level].allow_partial">À la carte: {{model.fees[model.fields.fee_level].same_fee_amount|currency}}</div>
+				<div ng-if="model.fees[model.fields.fee_level].partial_fee_type == 'different' && model.fees[model.fields.fee_level].allow_partial">À la carte: {{model.fees[model.fields.fee_level].resources.days[$index].amount|currency}}</div>
+				</div>
+				<div class="col-xs-8" ng-bind-html="day.description|translateValue"></div>
+			</div>
+			<div class="row ps-ng-activity" ng-repeat="activity in day.resources.activities" ng-if="activity.is_additional">
+				<input class="col-xs-2" ng-model="activity.selected" type="checkbox" name="activities[]" id="activity_{{activity.id}}" ng-checked="activity.selected" ng-if="activity.seats_remaining > 0 || activity.selected" />
+				<div class="col-xs-2">{{activity.amount|currency}}
+					<div>{{activity.seats_remaining}} spots left</div>
+				</div>
+				<div class="col-xs-8" ng-bind-html="activity.description|translateValue"></div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" ng-click="cancel()" onclick="return false;">Cancel</button>
+		<input type="submit" value="Update" class="btn btn-primary" ng-disabled="form.$invalid" disabled="disabled" ng-if="model.unique_id">
+		<input type="submit" value="Create" class="btn btn-primary" ng-disabled="form.$invalid" disabled="disabled" ng-if="!model.unique_id">
+	</div>
+</form>

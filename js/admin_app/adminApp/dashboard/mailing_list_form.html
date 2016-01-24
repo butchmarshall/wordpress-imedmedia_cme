@@ -1,0 +1,15 @@
+<form name="form" novalidate ng-submit="onSubmit(model)">
+	<div class="modal-header">
+		<h3 class="modal-title">New Mailing List</h3>
+	</div>
+	<div class="modal-body">
+		<div class="form-group">
+			<label for="name" class="control-label">Mailing List Name</label>
+			<input type="text" ng-model="model.name" name="name" id="name" placeholder="Mailing List Name" required class="form-control">
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" ng-click="cancel()" onclick="return false;">Cancel</button>
+		<input type="submit" value="Create" class="btn btn-primary" ng-disabled="form.$invalid" disabled="disabled">
+	</div>
+</form>

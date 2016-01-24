@@ -1,0 +1,26 @@
+<form name="form" novalidate ng-submit="onSubmit(model)">
+	<div class="modal-header">
+		<h3 class="modal-title" ng-if="model.id">Edit Day</h3>
+		<h3 class="modal-title" ng-if="!model.id">New Day</h3>
+	</div>
+	<div class="modal-body">
+		<input type="hidden" ng-model="model.id" ng-if="model.id > 0" />
+		<div class="form-group" ng-if="isDateObject(model.day.starts_at)">
+			<label for="starts_at" class="control-label">Date</label>
+			<input type="date" ng-model="model.day.starts_at" name="name" id="starts_at" required class="form-control">
+		</div>
+		<div class="form-group">
+			<label for="description">Checkout Overview</label>
+			<textarea ui-tinymce="tinymceOptions" ng-model="mce_description_html"></textarea>
+		</div>
+		<div class="form-group">
+			<label for="schedule_description">Schedule Overview</label>
+			<textarea ui-tinymce="tinymceOptions" ng-model="mce_schedule_description_html"></textarea>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn" ng-click="cancel()" onclick="return false;">Cancel</button>
+		<input type="submit" value="Update" class="btn btn-primary" ng-disabled="form.$invalid" disabled="disabled" ng-if="model.id">
+		<input type="submit" value="Create" class="btn btn-primary" ng-disabled="form.$invalid" disabled="disabled" ng-if="!model.id">
+	</div>
+</form>

@@ -1,0 +1,8 @@
+<div class="container">
+	<ul class="nav nav-tabs">
+	  <li ng-class="{true:'active', false:''}[tab_active('course.registrants.complete')]"><a ui-sref="course.registrants.complete" href="#">Completed</a></li>
+	  <li ng-class="{true:'active', false:''}[tab_active('course.registrants.incomplete')]"><a ui-sref="course.registrants.incomplete" href="#">Incomplete</a></li>
+	</ul>
+
+	<div ui-view></div>
+</div>

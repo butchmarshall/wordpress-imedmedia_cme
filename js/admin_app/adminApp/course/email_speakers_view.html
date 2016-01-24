@@ -1,0 +1,85 @@
+<form class="panel panel-default" ng-submit="onSubmit(model)">
+	<div class="panel-heading clearfix">
+		<h2 class="panel-title pull-left">Email Speakers</h2>
+	</div>
+	<div class="panel-body">
+		<tags-input
+				placeholder="Add a recipient" 
+				min-length="1"
+				add-from-autocomplete-only="true"
+				ng-model="model.to"
+				display-property="first_name"
+				key-property="id"
+				template="{{speakers_pill}}">
+			<auto-complete source="loadSpeakers($query)" template="{{speakers_auto_complete}}" min-length="1"></auto-complete>
+		</tags-input>
+		<div class="form-group">
+			<input type="text" ng-model="model.cc" name="cc" id="cc" placeholder="CC" class="form-control">
+		</div>
+		<div class="form-group">
+			<input type="text" ng-model="model.bcc" name="bcc" id="bcc" placeholder="BCC" class="form-control">
+		</div>
+		<div class="form-group">
+			<input type="text" ng-model="model.subject" name="subject" id="subject" placeholder="Subject" class="form-control" required>
+		</div>
+		<div class="form-group input-group" ng-repeat="item in model.attachments track by $index">
+			<span class="input-group-addon">
+				<span class="glyphicon glyphicon-upload"></span>
+			</span>
+			<input type="hidden" ng-model="item.id" name="attachment[$index][id]" class="form-control" />
+			<input type="text" ng-model="item.name" name="attachment[$index][name]" class="form-control" required />
+			<span class="input-group-addon">
+				<a href="#" onclick="return false;" ng-click="attachment_remove($index)">
+					<span class="glyphicon glyphicon-remove"></span>
+				</a>
+			</span>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th width="50%">Name</th>
+					<th ng-show="uploader.isHTML5">Size</th>
+					<th ng-show="uploader.isHTML5">Progress</th>
+					<th>Status</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="item in uploader.queue">
+					<td><strong>{{ item.file.name }}</strong></td>
+					<td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+					<td ng-show="uploader.isHTML5">
+						<div class="progress" style="margin-bottom: 0;">
+							<div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+						</div>
+					</td>
+					<td class="text-center">
+						<span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+						<span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+						<span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+					</td>
+					<td nowrap>
+						<button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+							<span class="glyphicon glyphicon-ban-circle"></span> Cancel
+						</button>
+						<button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+							<span class="glyphicon glyphicon-trash"></span> Remove
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="form-group clearfix">
+			<input type="file" nv-file-select uploader="uploader" multiple /><br/>
+		</div>
+		<div class="form-group">
+			<textarea name="body" ng-model="model.body" required ng-minlength="1" class="form-control" rows="15" placeholder="Message" required></textarea>
+		</div>
+		<div class="form-group clearfix">
+			<div class="pull-right">
+			<input type="button" value="Send Preview" class="btn btn-default" ng-disabled="form.$invalid" disabled="disabled" ng-click=onPreview(model)>
+			<input type="submit" value="Send" class="btn btn-danger" ng-disabled="form.$invalid" disabled="disabled">
+			</div>
+		</div>
+	</div>
+</form>

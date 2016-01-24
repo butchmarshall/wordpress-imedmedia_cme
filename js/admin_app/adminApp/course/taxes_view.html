@@ -1,0 +1,37 @@
+<div class="row">
+<div class="col-sm-10">
+	<form class="panel panel-default" ng-repeat="tax in taxes.data" id="tax_{{tax.id}}" name="form" novalidate ng-submit="onSubmit(tax.id, tax)">
+		<div class="panel-heading clearfix">
+			<h2 class="panel-title pull-left">{{tax.name}}</h2>
+			<button type="button" class="btn btn-default pull-right" ng-click="tax_delete(tax.id)"><span class="glyphicon glyphicon-remove"></span></button>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-sm-12">
+					<label for="{{tax.id}}_name" class="control-label">Name</label>
+					<input type="text" ng-model="tax.name" name="name" id="{{tax.id}}_name" placeholder="Name" required class="form-control">
+				</div>
+				<div class="col-sm-12">
+					<label for="{{tax.id}}_percent" class="control-label">Percent</label>
+					<input type="text" ng-model="tax.percent" name="percent" id="{{tax.id}}_percent" placeholder="Percent" required class="form-control">
+				</div>
+			</div>
+			<div class="clearfix">
+				<input type="submit" class="btn btn-default pull-right" ng-click="tax_update(tax.id)" value="Save" />
+			</div>
+		</div>
+	</form>
+</div>
+<div class="col-sm-2 scrollspy">
+	<div id="schedule_nav" class="bs-docs-sidebar" affix="" data-spy="affix">
+	<ul class="nav nav-stacked">
+		<li ng-repeat="tax in taxes.data">
+			<a href="#tax_{{tax.id}}" du-smooth-scroll>{{tax.name}}</a>
+		</li>
+		<li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<button type="button" class="btn btn-default" ng-click="tax_create()">Add Tax</button>
+		</li>
+	</ul>
+	</div>
+</div>
+</div>

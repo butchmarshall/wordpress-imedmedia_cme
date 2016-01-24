@@ -1,0 +1,40 @@
+<div class="panel panel-default">
+	<div class="panel-heading clearfix">
+		<h2 class="panel-title pull-left">{{category.name.en}}</h2>
+		<div class="btn-group pull-right">
+		  <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">&nbsp;<span class="caret"></span>&nbsp;</button>
+		  <ul class="dropdown-menu" role="menu">
+			<li><a href="#" onclick="return false;" ng-click="edit_category(category.id)">Edit Category</a></li>
+			<li ng-if="category.resources.items.length == 0"><a href="#" onclick="return false;" ng-click="add_category_item(category.id, 1)">Add Item</a></li>
+			<li class="divider"></li>
+			<li><a href="#" onclick="return false;" ng-click="delete_category(category.id)">Delete Category</a></li>
+		  </ul>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div ng-repeat="item in category.resources.items">
+			<div class="row">
+				<div class="col-md-2 col-md-offset-5"><button ng-click="add_category_item(category.id, $index+1)" type="button" class="btn btn-default">Add Item Here</button></div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading clearfix">
+					<h2 class="panel-title pull-left">{{item.name.en}}</h2>
+					<div class="btn-group pull-right">
+					  <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-expanded="false">&nbsp;<span class="caret"></span>&nbsp;</button>
+					  <ul class="dropdown-menu" role="menu">
+						<li><a href="#" onclick="return false;" ng-click="edit_category_item(category.id, item.id)">Edit Item</a></li>
+						<li class="divider"></li>
+						<li><a href="#" onclick="return false;" ng-click="delete_category_item(category.id, item.id)">Delete Item</a></li>
+					  </ul>
+					</div>
+				</div>
+				<div class="panel-body" ng-bind-html="item.description.en"></div>
+			</div>
+			
+			<div class="row" ng-if="$last">
+				<div class="col-md-2 col-md-offset-5"><button ng-click="add_category_item(category.id, $index+2)" type="button" class="btn btn-default">Add Item Here</button></div>
+			</div>
+		</div>
+	</div>
+</div>

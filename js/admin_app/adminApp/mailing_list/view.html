@@ -1,0 +1,35 @@
+<div class="container-fluid">
+	<div class="row">
+		<h2>{{mailing_list.name}}
+			<div class="pull-right">
+				<button ng-click="email_mailing_list(mailing_list.id)" class="btn" onclick="return false;">Email List</button>
+				<button ui-sref="dashboard.mailing_lists" class="btn" onclick="return false;">Back to Lists</button>
+				<button ng-click="find_recipients()" class="btn btn-primary" onclick="return false;">Find Recipients</button>
+			</div>
+		</h2>
+		<h3>All Recipients</h3>
+
+		<table ng-table="tableParams" class="table table-hover">
+			<thead>
+				<tr>
+					<th class="header text-left">
+						<i class="glyphicon glyphicon-envelope"></i> Email
+					</th>
+					<th class="header text-left">
+						<i class="glyphicon glyphicon-user"></i> Name
+					</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="user in $data track by $index">
+					<td>{{user.email}}</td>
+					<td>{{user.first_name}} {{user.last_name}}</td>
+					<td>
+						<button type="button" class="btn btn-default pull-right" ng-click="delete_mailing_list_user(mailing_list.id, user.id)"><span class="glyphicon glyphicon-remove"></span></button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

@@ -1,0 +1,52 @@
+<div class="container cme-courses-list" ng-controller="CoursesController">
+	<div class="row">
+		<div class="col-md-12">
+			<button class="btn btn-primary pull-right" ng-click="add_course()">Add Course</button>
+		</div>
+	</div>
+
+	<table ng-table="tableParams" class="table table-hover">
+		<thead>
+			<tr>
+				<th class="header text-left sortable" ng-class="{
+					'sort-asc': tableParams.isSortBy('translation.name', 'asc'),
+					'sort-desc': tableParams.isSortBy('translation.name', 'desc')
+				  }"
+					filter="{ 'name': 'text' }"
+					ng-click="sortFields('translated_order', 'name')">
+					<div class="sort-indicator"><i class="glyphicon glyphicon-user"></i> Course Name</div>
+				</th>
+				<th width="15%" class="header text-left sortable" ng-class="{
+					'sort-asc': tableParams.isSortBy('starts_at', 'asc'),
+					'sort-desc': tableParams.isSortBy('starts_at', 'desc')
+				  }"
+					filter="{ 'starts_at': 'text' }"
+					ng-click="sortFields('order', 'starts_at')">
+					<div class="sort-indicator"><i class="glyphicon glyphicon-flag"></i> Starts At</div></th>
+				<th width="15%" class="header text-left">Ends At</th>
+				<th width="15%" class="header text-left">State</th>
+				<th width="10%" class="header text-left">Registrants</th>
+				<th></th>
+			</tr>
+			<tr>
+				<th class="text-center sortable">
+					<input type="text" class="form-control" placeholder="Search"
+						ng-model="search.name" ng-model-options="{debounce: 250}"  />
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="course in $data">
+				<td ng-click="course_selected(course.id)" sortable="fields.name">{{course.name.en}}</td>
+				<td ng-click="course_selected(course.id)" sortable="fields.starts_at">{{course.starts_at}}</td>
+				<td ng-click="course_selected(course.id)" sortable="fields.ends_at">{{course.ends_at}}</td>
+				<td ng-click="course_selected(course.id)" sortable="fields.state">{{course.state}}</td>
+				<td ng-click="course_selected(course.id)" sortable="fields.total_registrants">{{course.total_registrants}}</td>
+				<td>
+					<button type="button" class="btn btn-default pull-right" ng-click="course_delete(course.id)"><span class="glyphicon glyphicon-remove"></span></button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>
