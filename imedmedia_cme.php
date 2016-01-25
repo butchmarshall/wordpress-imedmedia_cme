@@ -87,7 +87,7 @@ add_action('wp_head', function() {
 add_action( 'admin_init', 'my_admin_init' );
 function my_admin_init() {
     register_setting( 'my-settings-group', 'cme_site_id' );
-	register_setting( 'my-settings-group', 'cme_domain_id' );
+	register_setting( 'my-settings-group', 'cme_domain' );
 	register_setting( 'my-settings-group', 'cme_course_url' );
 	register_setting( 'my-settings-group', 'cme_register_url' );
 	register_setting( 'my-settings-group', 'cme_my_courses_url' );
